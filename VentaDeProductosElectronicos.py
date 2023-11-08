@@ -24,7 +24,43 @@ def registrarNuevoCliente():
     except:
 
         messagebox.showerror("Error", "No se ha podido registrar al cliente, verifique los datos e intente nuevamente.")
-        
+
+def ventana():
+    ventana1 = Tk()
+    
+    ventana1.title("Nueva Orden")
+
+    miFrame3 = Frame(ventana1, width = 1200, height = 600)
+    miFrame3.pack()
+
+    global cuadroCliente, cuadroProducto, cuadroDistrito
+
+    cuadroCliente = Entry(miFrame3)
+    cuadroCliente.grid(row = 1, column = 1, padx = 10, pady = 10)
+
+    cuadroProducto = Entry(miFrame3)
+    cuadroProducto.grid(row = 2, column = 1, padx = 10, pady = 10)
+
+    cuadroDistrito = Entry(miFrame3)
+    cuadroDistrito.grid(row = 3, column = 1, padx = 10, pady = 10)
+
+    tituloLabel = Label(miFrame3, text = "Generar Orden ")
+    tituloLabel.grid(row = 0, column = 0, columnspan=2, sticky = "nsew", padx = 10, pady = 10)
+
+    clienteLabel = Label(miFrame3, text = "Cliente: ")
+    clienteLabel.grid(row = 1, column = 0, sticky = "nsew", padx = 10, pady = 10)
+
+    productoLabel = Label(miFrame3, text = "Producto: ")
+    productoLabel.grid(row = 2, column = 0, sticky = "nsew", padx = 10, pady = 10)
+
+    distritoLabel = Label(miFrame3, text = "Distrito: ")
+    distritoLabel.grid(row = 3, column = 0, sticky = "nsew", padx = 10, pady = 10)
+
+    botonGenerarOrden = Button(ventana1, text = "Generar", command=Ventana2)
+    botonGenerarOrden.pack()
+
+    ventana1.mainloop()
+    
 def Ventana2 ():
 
     cliente = cuadroCliente.get()
@@ -96,41 +132,46 @@ def Ventana2 ():
             
         ventana2.mainloop()
 
+def clientes():
+    miConexion = sqlite3.connect("CreacionBD")
+
+    miCursor = miConexion.cursor()
+    
+    
+def productos():
+
+    miConexion = sqlite3.connect("CreacionBD")
+
+    miCursor = miConexion.cursor()
+def distritos():
+
+    miConexion = sqlite3.connect("CreacionBD")
+
+    miCursor = miConexion.cursor()
 
 raiz=Tk()
 
-raiz.title("Ventana")
+barraMenu=Menu(raiz)
+raiz.config(menu=barraMenu, width=300, height=300)
 
-miFrame = Frame(raiz, width = 1200, height = 600)
-miFrame.pack()
+archivoNuevaOrden=Menu(barraMenu)
 
-global cuadroCliente, cuadroProducto, cuadroDistrito
+archivoClientes=Menu(barraMenu)
 
-cuadroCliente = Entry(miFrame)
-cuadroCliente.grid(row = 1, column = 1, padx = 10, pady = 10)
+archivoProductos=Menu(barraMenu)
 
-cuadroProducto = Entry(miFrame)
-cuadroProducto.grid(row = 2, column = 1, padx = 10, pady = 10)
+archivoDistritos=Menu(barraMenu)
 
-cuadroDistrito = Entry(miFrame)
-cuadroDistrito.grid(row = 3, column = 1, padx = 10, pady = 10)
+barraMenu.add_command(label="Nueva Orden", command=ventana)
 
-tituloLabel = Label(miFrame, text = "Generar Orden ")
-tituloLabel.grid(row = 0, column = 0, columnspan=2, sticky = "nsew", padx = 10, pady = 10)
+barraMenu.add_command(label="Clientes", command=)
 
-clienteLabel = Label(miFrame, text = "Cliente: ")
-clienteLabel.grid(row = 1, column = 0, sticky = "nsew", padx = 10, pady = 10)
+barraMenu.add_command(label="Productos", command=)
 
-productoLabel = Label(miFrame, text = "Producto: ")
-productoLabel.grid(row = 2, column = 0, sticky = "nsew", padx = 10, pady = 10)
-
-distritoLabel = Label(miFrame, text = "Distrito: ")
-distritoLabel.grid(row = 3, column = 0, sticky = "nsew", padx = 10, pady = 10)
-
-botonGenerarOrden = Button(raiz, text = "Generar", command=Ventana2)
-botonGenerarOrden.pack()
+barraMenu.add_command(label="Distritos", command=)
 
 raiz.mainloop()
+
 
 
 
